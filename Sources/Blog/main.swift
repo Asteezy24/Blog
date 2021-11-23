@@ -9,8 +9,11 @@ struct Blog: Website {
     enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
         case home
-        case posts
-        case about
+        case combine = "combine"
+        case swiftUI = "SwiftUI"
+        case dataStructures = "DataStructures"
+        case algorithms = "Algorithms"
+        case about = "About"
     }
 
     struct ItemMetadata: WebsiteItemMetadata {
@@ -33,5 +36,5 @@ extension Theme where Site == Blog {
 }
 
 // This will generate your website using the built-in Foundation theme:
-try Blog().publish(withTheme: .tutorial)
+//try Blog().publish(withTheme: .tutorial)
 try Blog().publish(withTheme: .tutorial, plugins: [.splash(withClassPrefix: "")])

@@ -17,25 +17,27 @@ extension Node where Context == HTML.BodyContext {
         return .header(
             // Begin the wrapper class
             .wrapper(
-                // Create your main title
-                .h1("My Swift Blog"),
-                // Create the nav node
-                .nav(
-                    // Create and undordered list and loop through your navItems yuou created above
-                    .ul(
-                        .forEach(
-                            Blog.SectionID.allCases
-                        ) { item in
-                            .li(
-                                // Create an anchor tag to make linkes
-                                .a(
-                                    // Redirect the user to a new webpage on your site when they click each item
-                                    .href("/\(item.rawValue.lowercased())"),
-                                    .text(item.rawValue.capitalized)
-                                )
+                // Create your main title,
+                .h3("Alex's Swift Blog")
+                // Creates another container for link to John Sundell's publish repo
+//                // Create the nav node
+
+            ),
+            .nav(
+                // Create and undordered list and loop through your navItems yuou created above
+                .ul(
+                    .forEach(
+                        Blog.SectionID.allCases
+                    ) { item in
+                        .li(
+                            // Create an anchor tag to make linkes
+                            .a(
+                                // Redirect the user to a new webpage on your site when they click each item
+                                .href("/\(item.rawValue.camelized)"),
+                                .text(item.rawValue.capitalized)
                             )
-                        }
-                    )
+                        )
+                    }
                 )
             )
         )

@@ -10,16 +10,14 @@ import Publish
 import Plot
 
 extension MyHTMLFactory {
-    func makeHomeHTML<T: Website>(for index: Index, section: Section<T>, context: PublishingContext<T>) throws -> HTML {
-        var homeImage: Path { "Images/swift.png" }
-        
+    func makeHomeHTML<T: Website>(for index: Index, section: Section<T>, context: PublishingContext<T>) throws -> HTML {        
         return
             HTML(
                 .head(for: index, on: context.site),
                 .body(
                     .myHeader(for: context),
-                    .class("logo-image"),
-                    .img(.class("post-image"), .src(homeImage)),
+                    .postContent(for: section.items, on: context.site),
+                    //.postsBy(author: "Albus Dumbledore", section: section, on: context.site),
                     .myFooter(for: context.site)
                 )
         )

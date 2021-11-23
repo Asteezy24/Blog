@@ -20,7 +20,9 @@ extension Node where Context == HTML.BodyContext {
         }
         
         return
-            .wrapper(
+           // .wrapper(
+            .div(
+                .class("post-list"),
                 // Create an unordered list
                 .ul(
                     // Loop over each blog post that we have in our code
