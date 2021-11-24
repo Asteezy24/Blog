@@ -15,8 +15,10 @@ extension MyHTMLFactory {
             HTML(
                 .head(for: index, on: context.site),
                 .body(
+                    .topBanner(),
+                    .latestPost(for: section.items, on: context.site),
                     .myHeader(for: context),
-                    .postContent(for: section.items, on: context.site),
+                    //.homeBody(for: section.items, on: context.site),
                     //.postsBy(author: "Albus Dumbledore", section: section, on: context.site),
                     .myFooter(for: context.site)
                 )

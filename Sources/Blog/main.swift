@@ -9,9 +9,9 @@ struct Blog: Website {
     enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
         case home
-        case combine = "combine"
+        case combine = "Combine"
         case swiftUI = "SwiftUI"
-        case dataStructures = "DataStructures"
+        case dataStructures
         case algorithms = "Algorithms"
         case about = "About"
     }

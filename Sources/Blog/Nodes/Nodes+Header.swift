@@ -16,13 +16,13 @@ extension Node where Context == HTML.BodyContext {
         
         return .header(
             // Begin the wrapper class
-            .wrapper(
-                // Create your main title,
-                .h3("Alex's Swift Blog")
-                // Creates another container for link to John Sundell's publish repo
-//                // Create the nav node
-
-            ),
+//            .wrapper(
+//                // Create your main title,
+//                .h3("Alex's Swift Blog")
+//                // Creates another container for link to John Sundell's publish repo
+////                // Create the nav node
+//
+//            ),
             .nav(
                 // Create and undordered list and loop through your navItems yuou created above
                 .ul(
@@ -34,12 +34,23 @@ extension Node where Context == HTML.BodyContext {
                             .a(
                                 // Redirect the user to a new webpage on your site when they click each item
                                 .href("/\(item.rawValue.camelized)"),
-                                .text(item.rawValue.capitalized)
+                                .text(Self.getTitle(item: item))
                             )
                         )
                     }
                 )
             )
         )
+    }
+    
+    static func getTitle(item: Blog.SectionID) -> String {
+        if item == .home {
+            return "Home"
+        }
+        if item == .dataStructures {
+            return "Data Structures"
+        }
+        
+        return item.rawValue
     }
 }

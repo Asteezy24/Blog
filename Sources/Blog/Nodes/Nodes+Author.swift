@@ -21,7 +21,7 @@ extension Node where Context == HTML.BodyContext {
             .wrapper(
                 .div(
                     .h1("Posts by \(author)"),
-                    .postContent(for: items, on: site)
+                    .homeBody(for: items, on: site)
                 )
         )
     }

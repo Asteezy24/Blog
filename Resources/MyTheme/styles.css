@@ -18,9 +18,25 @@ body {
     text-align: center;
 }
 
-.logo-image img class="post-image" {
-    width: 30%;
-    margin: 20px;
+.post-image {
+    width: 100%;
+    height: 100%;
+/*    margin-right: auto;*/
+    margin-left: auto;
+    display: block;
+}
+
+.latest-post {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.latest-post-text {
+    text-align: left;
 }
 
 .post-category {
@@ -155,6 +171,21 @@ a {
     margin-right: auto;
     padding: 40px;
     text-align: left;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+/*  height: 300px; /* Should be removed. Only for demonstration */*/
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .item-list > li {

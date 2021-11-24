@@ -70,7 +70,7 @@ struct MyHTMLFactory: HTMLFactory {
                 .h1(
                     .text("All posts with the tag \(page.tag.string)")
                 ),
-                .postContent(for: context.items(taggedWith: page.tag), on: context.site),
+                .homeBody(for: context.items(taggedWith: page.tag), on: context.site),
                 .myFooter(for: context.site)
             )
         )
