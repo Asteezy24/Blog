@@ -19,38 +19,35 @@ extension Node where Context == HTML.BodyContext {
             $0.date > $1.date
         }
         
+        let homeImage: Path = "Images/apple.png"
+
+        
         return
-        // .wrapper(
             .div(
-                .class("row"),
+                .class("row home-body-container"),
+                .style("margin-left: 10%;margin-right: 10%;"),
                 .div(
-                    .class("post-list"),
                     .class("column"),
-                    // Create an unordered list
+                    .style("width: 70%;"),
                     .ul(
-                        // Loop over each blog post that we have in our code
                         .class("item-list"),
                         .forEach(
                             sortedItems
                         ) { item in
-                            // Creates a list item for each post
                                 .li (
-                                    // Creates an article node to display our information
+                                    .img(.src(homeImage)),
+                                    .br(),
+                                    .tagList(for: item.tags, on: site),
+                                    .br(),
                                     .article(
-                                        // Creates a heading with our post title
-                                        
                                         .h1(
-                                            // Creates an anchor tag so we can create the link to our post
                                             .a(
-                                                // Creates the link to our post so we can click it and read everything
                                                 .href(item.path),
                                                 .text(item.title)
                                             )
                                         ),
-                                        // Creates a description  of what our post is about
-                                        .p(.text("Published: \(formatter.string(from: item.lastModified))")),
-                                        .tagList(for: item.tags, on: site),
-                                        .p(.text(item.description))
+                                        .p(.text("\(formatter.string(from: item.lastModified))"))
+                                        //.p(.text(item.description))
                                     )
                                 )
                         }
@@ -59,8 +56,10 @@ extension Node where Context == HTML.BodyContext {
                 ),
                 .div(
                     .class("column"),
+                    .style("width: 30%;"),
                     .newsletter(),
-                        .socialsList()
+                    .br(),
+                    .socialsList()
                 )
             )
     }

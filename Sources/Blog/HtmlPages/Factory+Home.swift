@@ -17,8 +17,8 @@ extension MyHTMLFactory {
                 .body(
                     .topBanner(),
                     .latestPost(for: section.items, on: context.site),
-                    .myHeader(for: context),
-                    //.homeBody(for: section.items, on: context.site),
+                    .navigationBar(for: context),
+                    .homeBody(for: section.items, on: context.site),
                     //.postsBy(author: "Albus Dumbledore", section: section, on: context.site),
                     .myFooter(for: context.site)
                 )

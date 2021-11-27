@@ -32,7 +32,7 @@ struct MyHTMLFactory: HTMLFactory {
             return HTML(
                 .head(for: context.index, on: context.site),
                 .body(
-                    .myHeader(for: context),
+                    .navigationBar(for: context),
                     .myFooter(for: context.site)
                 )
             )
@@ -43,7 +43,7 @@ struct MyHTMLFactory: HTMLFactory {
         HTML(
             .head(for: item, on: context.site),
             .body(
-                .myHeader(for: context),
+                .navigationBar(for: context),
                 .wrapper(
                     .article(
                         .contentBody(item.body)
@@ -66,7 +66,7 @@ struct MyHTMLFactory: HTMLFactory {
         HTML(
             .head(for: context.index, on: context.site),
             .body(
-                .myHeader(for: context),
+                .navigationBar(for: context),
                 .h1(
                     .text("All posts with the tag \(page.tag.string)")
                 ),

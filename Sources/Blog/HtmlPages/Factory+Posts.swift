@@ -14,7 +14,7 @@ extension MyHTMLFactory {
         HTML(
             .head(for: context.index, on: context.site),
             .body(
-                .myHeader(for: context),
+                .navigationBar(for: context),
 //                .postContent(for: section.items, on: context.site),
                 //.postsBy(author: "Albus Dumbledore", section: section, on: context.site),
                 .myFooter(for: context.site)

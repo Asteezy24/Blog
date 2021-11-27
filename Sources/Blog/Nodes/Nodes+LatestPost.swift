@@ -15,7 +15,7 @@ extension Node where Context == HTML.BodyContext {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         let firstItem = items.first!
-        let homeImage: Path = "Images/swift.png"
+        let homeImage: Path = "Images/apple.png"
         
         return
             .div(
@@ -24,7 +24,6 @@ extension Node where Context == HTML.BodyContext {
                 .br(),
                 .div (
                     .style("display: inline-block;"),
-                    //                .class("post-list"),
                     .div(
                         .class("column latest-post-image"),
                         .img(.class("post-image"), .src(homeImage))

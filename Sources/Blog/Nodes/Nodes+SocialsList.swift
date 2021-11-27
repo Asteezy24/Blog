@@ -19,8 +19,10 @@ extension Node where Context == HTML.BodyContext {
     static func socialsList() -> Node {
         return
             .div(
-                .h2("Follow me"),
+                .class("socials-div"),
+                .h3("Follow me"),
                 .ul(
+                    .class("socials-list"),
                     .forEach(Socials.allCases, { socialMedia in
                     .li (.h5("\(socialMedia.rawValue)"))
                     })

@@ -13,12 +13,13 @@ extension Node where Context == HTML.BodyContext {
     static func newsletter() -> Node {
         return
             .div(
+                .class("newsletter-div"),
                 // Create your main title,
                 .h3("Newsletter"),
-                    .input()
-                // Creates another container for link to John Sundell's publish repo
-                //                // Create the nav node
-                
+                .div(
+                    .class("newsletter-input"),
+                    .input(.type(.text))
+                )
             )
     }
 }

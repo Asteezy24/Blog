@@ -1,9 +1,9 @@
 
 /**
-*  Publish Foundation theme
-*  Copyright (c) John Sundell 2019
-*  MIT license, see LICENSE file for details
-*/
+ *  Publish Foundation theme
+ *  Copyright (c) John Sundell 2019
+ *  MIT license, see LICENSE file for details
+ */
 
 * {
     margin: 0;
@@ -21,7 +21,7 @@ body {
 .post-image {
     width: 100%;
     height: 100%;
-/*    margin-right: auto;*/
+    /*    margin-right: auto;*/
     margin-left: auto;
     display: block;
 }
@@ -41,6 +41,7 @@ body {
 
 .post-category {
     margin: 1px;
+    padding:3px;
     padding: 0.3em 1em;
     color: #fff;
     background: #999;
@@ -104,7 +105,7 @@ pre code .preprocessing {
 
 .wrapper {
     max-width: 900px;
-/*    margin-left: auto;*/
+    /*    margin-left: auto;*/
     margin-right: auto;
     padding: 40px;
     text-align: left;
@@ -130,19 +131,44 @@ header .site-name {
     font-weight: bold;
 }
 
-nav {
-    margin-top: 20px;
-}
-
-nav li {
+.nav-bar {
+    overflow: hidden;
+    /*  background-color: #333;*/
     display: inline-block;
-    margin: 0 7px;
-    line-height: 1.5em;
 }
 
-nav li a.selected {
-    text-decoration: underline;
+.nav-bar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }
+
+.nav-bar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.nav-bar a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/*nav {*/
+/*    margin-top: 20px;*/
+/*}*/
+/**/
+/*nav li {*/
+/*    display: inline-block;*/
+/*    margin: 0 7px;*/
+/*    line-height: 1.5em;*/
+/*}*/
+/**/
+/*nav li a.selected {*/
+/*    text-decoration: underline;*/
+/*}*/
 
 h1 {
     margin-bottom: 20px;
@@ -175,31 +201,84 @@ a {
 
 /* Create two equal columns that floats next to each other */
 .column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-/*  height: 300px; /* Should be removed. Only for demonstration */*/
+    float: left;
+    width: 50%;
+    padding: 10px;
+    /*  height: 300px; /* Should be removed. Only for demonstration */*/
 }
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.item-list {
+    /*    display: table;*/
+    margin: 0 auto;
+    column-count: 2;
+}
+
+.newsletter-div {
+    text-align: left;
+}
+
+.newsletter-input > input {
+    text-align: left;
+    border-radius: 16px;
+    width: 60%;
+    height: 35px;
+}
+
+.socials-list {
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+}
+
+.socials-list > li {
+    color: black;
+    background-color: #bdbebf;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    padding: 8px;
+    width: 60%;
+}
+
+.socials-div {
+    text-align: left;
+}
+
+.socials-list {
+    list-style-type: none; /* Remove bullets */
+    margin: 0;
+    padding: 0;
+}
+
+/*.home-body-container {*/
+/*    margin-left: 10%;*/
+/*    margin-right: 10%;*/
+/*}*/
+
+.item-list > img {
+    width: 100%
+    padding: 0px;
 }
 
 .item-list > li {
     display: block;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: #eee;
+    /*    width: 50%;*/
+    /*    border-radius: 20px;*/
+    /*    background-color: #eee;*/
     margin-bottom: 20px;
-    max-width: 900px;
-/*    margin-left: auto;*/
+    margin-left: auto;
     margin-right: auto;
-    padding: 40px;
     text-align: left;
-/*    display: inline-block;*/
+    /*    padding: 40px;*/
+    overflow: hidden; /* fix for Firefox */
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
 }
 
 .item-list > li:last-child {
@@ -261,16 +340,16 @@ footer {
     body {
         background-color: #222;
     }
-
+    
     body,
     header .site-name {
         color: #ddd;
     }
-
+    
     .item-list > li {
-        background-color: #333;
+        /*        background-color: #333;*/
     }
-
+    
     header {
         background-color: #000;
     }
