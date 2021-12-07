@@ -232,6 +232,7 @@ a {
     background-color: #333333d9;
     padding: 40px;
     border-radius: 8px;
+    text-align: left;
 }
 
 .item-article-body {

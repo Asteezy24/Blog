@@ -1,8 +1,9 @@
 ---
 date: 2021-11-26 8:33
+image: Images/apple.png
 description: Why I chose to create a Swift blog.
 tags: About me
-author: Albus Dumbledore
+author: Alex Stevens
 ---
 # About myself!
 

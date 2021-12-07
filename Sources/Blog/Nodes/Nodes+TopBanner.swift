@@ -13,8 +13,12 @@ extension Node where Context == HTML.BodyContext {
     static func topBanner() -> Node {
         return
             .wrapper(
-                .h3("The Swift Refresher")
+                .h3(
+                    .a(
+                        .href("/"),
+                        .text("The Swift Refresher")
+                    )
+                )
             )
     }
 }
-

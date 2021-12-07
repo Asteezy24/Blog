@@ -31,11 +31,14 @@ struct MyHTMLFactory: HTMLFactory {
     }
     
     func makeItemHTML(for item: Item<Blog>, context: PublishingContext<Blog>) throws -> HTML {
-        HTML(
+        return HTML(
             .head(for: item, on: context.site),
             .body(
                 .topBanner(),
                 .navigationBar(for: context),
+                .br(),
+                .img(.src(item.imagePath ?? "")),
+                .br(),
                 .div (
                     .class("item-article-body"),
                     .article(

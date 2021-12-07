@@ -38,4 +38,6 @@ extension Theme where Site == Blog {
 
 // This will generate your website using the built-in Foundation theme:
 //try Blog().publish(withTheme: .tutorial)
-try Blog().publish(withTheme: .tutorial, plugins: [.splash(withClassPrefix: "")])
+try Blog(). publish(withTheme: .tutorial,
+                    deployedUsing: .gitHub(<#T##repository: String##String#>)
+                   plugins: [.splash(withClassPrefix: "")])

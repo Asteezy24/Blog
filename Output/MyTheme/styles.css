@@ -232,11 +232,13 @@ a {
     background-color: #333333d9;
     padding: 40px;
     border-radius: 8px;
+    text-align: left;
 }
 
 .item-article-body {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: left;
 }
 
 .socials-list {
