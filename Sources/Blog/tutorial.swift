@@ -22,15 +22,11 @@ struct MyHTMLFactory: HTMLFactory {
         case .home:
             return try makeHomeHTML(latestItem: latest, for: context.index, section: section, context: context)
         case .combine, .dataStructures, .algorithms, .swiftUI:
-            return try makePageByCategory(title: section.id.rawValue, latestPost: latest, for: section, context: context)
-        default:
-            return HTML(
-                .head(for: context.index, on: context.site),
-                .body(
-                    .navigationBar(for: context),
-                    .myFooter(for: context.site)
-                )
-            )
+            let tag = String.convertSectionToProperFormat(from: section.id)
+            let items = context.items(taggedWith: .init(tag))
+            return try makePageByCategory(title: section.id.rawValue, latestPost: latest, items: items, for: section, context: context)
+        case .about:
+            return try makeAboutHTML(for: context.index, context: context)
         }
     }
     
@@ -38,8 +34,10 @@ struct MyHTMLFactory: HTMLFactory {
         HTML(
             .head(for: item, on: context.site),
             .body(
+                .topBanner(),
                 .navigationBar(for: context),
-                .wrapper(
+                .div (
+                    .class("item-article-body"),
                     .article(
                         .contentBody(item.body)
                     )
@@ -61,6 +59,8 @@ struct MyHTMLFactory: HTMLFactory {
         HTML(
             .head(for: context.index, on: context.site),
             .body(
+                .topBanner(),
+//                .latestPost(for: latestItem, on: context.site),
                 .navigationBar(for: context),
                 .h1(
                     .text("All posts with the tag \(page.tag.string)")

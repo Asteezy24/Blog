@@ -20,23 +20,9 @@ extension Node where Context == HTML.BodyContext {
                 ) { item in
                         .a(
                             .href("/\(item.rawValue.camelized)"),
-                            .text(Self.getTitle(item: item))
+                            .text(String.convertSectionToProperFormat(from: item))
                         )
                 }
             )
-    }
-    
-    static func getTitle(item: Blog.SectionID) -> String {
-        if item == .home {
-            return "Home"
-        }
-        if item == .combine {
-            return "Combine"
-        }
-        if item == .dataStructures {
-            return "Data Structures"
-        }
-        
-        return item.rawValue
     }
 }

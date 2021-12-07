@@ -30,4 +30,22 @@ extension String {
 
         return ([first] + rest).joined(separator: "")
     }
+    
+    
+    static func convertSectionToProperFormat(from item: Blog.SectionID) -> Self {
+        switch item {
+        case .home :
+            return "Home"
+        case .combine:
+            return "Combine"
+        case .algorithms:
+            return "Algorithms"
+        case .dataStructures:
+            return "Data Structures"
+        case .swiftUI:
+            return "SwiftUI"
+        case .about:
+            return "About"
+        }
+    }
 }

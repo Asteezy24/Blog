@@ -21,6 +21,7 @@ extension Node where Context == HTML.BodyContext {
             .div(
                 .class("socials-div"),
                 .h3("Follow me"),
+                .br(),
                 .ul(
                     .class("socials-list"),
                     .forEach(Socials.allCases, { socialMedia in

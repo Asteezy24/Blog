@@ -17,12 +17,12 @@ extension Node where Context == HTML.BodyContext {
         formatter.dateStyle = .long
         
         let homeImage: Path = "Images/apple.png"
-
+        
         
         return
             .wrapper(
                 .div(
-                    .h1("Posts About \(Self.getPageTitle(item: section))"),
+                    .h1("Posts About \(String.convertSectionToProperFormat(from: section))"),
                     .div(
                         .ul(
                             .class("item-list"),
@@ -30,7 +30,7 @@ extension Node where Context == HTML.BodyContext {
                                 items
                             ) { item in
                                     .li (
-                                        .img(.src(homeImage)),
+                                        .img(.class("category-image"), .src(homeImage)),
                                         .br(),
                                         .tagList(for: item.tags, on: site),
                                         .br(),
@@ -50,21 +50,6 @@ extension Node where Context == HTML.BodyContext {
                         
                     )
                 )
-        )
+            )
     }
-    
-    static func getPageTitle(item: Blog.SectionID) -> String {
-        if item == .home {
-            return "Home"
-        }
-        if item == .combine {
-            return "Combine"
-        }
-        if item == .dataStructures {
-            return "Data Structures"
-        }
-        
-        return item.rawValue
-    }
-    
 }

@@ -20,10 +20,10 @@ extension Node where Context == HTML.BodyContext {
         }
         
         let homeImage: Path = "Images/apple.png"
-
         
         return
             .div(
+                .h2("All Posts"),
                 .class("row home-body-container"),
                 .style("margin-left: 10%;margin-right: 10%;"),
                 .div(
@@ -53,13 +53,6 @@ extension Node where Context == HTML.BodyContext {
                         }
                     )
                     
-                ),
-                .div(
-                    .class("column"),
-                    .style("width: 30%;"),
-                    .newsletter(),
-                    .br(),
-                    .socialsList()
                 )
             )
     }

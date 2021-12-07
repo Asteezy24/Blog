@@ -220,15 +220,24 @@ a {
     column-count: 2;
 }
 
-.newsletter-div {
-    text-align: left;
+.category-image {
+    width: 100%;
 }
 
-.newsletter-input > input {
+.about-me-body {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    background-color: #333333d9;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.item-article-body {
+    margin-left: 25%;
+    margin-right: 25%;
     text-align: left;
-    border-radius: 16px;
-    width: 60%;
-    height: 35px;
 }
 
 .socials-list {
