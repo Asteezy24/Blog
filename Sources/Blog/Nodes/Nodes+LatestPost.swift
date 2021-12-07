@@ -11,10 +11,9 @@ import Plot
 
 
 extension Node where Context == HTML.BodyContext {
-    static func latestPost<T: Website>(for items: [Item<T>], on site: T) -> Node {
+    static func latestPost<T: Website>(for item: Item<T>, on site: T) -> Node {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
-        let firstItem = items.first!
         let homeImage: Path = "Images/apple.png"
         
         return
@@ -31,16 +30,16 @@ extension Node where Context == HTML.BodyContext {
                     .div(
                         .class("column latest-post-text"),
                         .article(
-                            .tagList(for: firstItem.tags, on: site),
+                            .tagList(for: item.tags, on: site),
                             .h2(
                                 .a(
-                                    .href(firstItem.path),
-                                    .text(firstItem.title)
+                                    .href(item.path),
+                                    .text(item.title)
                                 )
                             ),
-                            .p(.text(firstItem.description)),
+                            .p(.text(item.description)),
                             .div (
-                                .p(.text("\(formatter.string(from: firstItem.lastModified))"))
+                                .p(.text("\(formatter.string(from: item.lastModified))"))
                             )
                         )
                     )

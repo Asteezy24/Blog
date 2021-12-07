@@ -10,16 +10,15 @@ import Publish
 import Plot
 
 extension MyHTMLFactory {
-    func makeHomeHTML<T: Website>(for index: Index, section: Section<T>, context: PublishingContext<T>) throws -> HTML {        
+    func makeHomeHTML<T: Website>(latestItem: Item<T>, for index: Index, section: Section<T>, context: PublishingContext<T>) throws -> HTML {
         return
             HTML(
                 .head(for: index, on: context.site),
                 .body(
                     .topBanner(),
-                    .latestPost(for: section.items, on: context.site),
+                    .latestPost(for: latestItem, on: context.site),
                     .navigationBar(for: context),
                     .homeBody(for: section.items, on: context.site),
-                    //.postsBy(author: "Albus Dumbledore", section: section, on: context.site),
                     .myFooter(for: context.site)
                 )
         )

@@ -13,21 +13,16 @@ struct MyHTMLFactory: HTMLFactory {
     func makeIndexHTML(for index: Index, context: PublishingContext<Blog>) throws -> HTML {
         let sections = context.sections
         let section = sections.first(where: { $0.id == .home})!
-        return try makeHomeHTML(for: index, section: section, context: context)
+        return try makeHomeHTML(latestItem: section.items.first!, for: index, section: section, context: context)
     }
     
     func makeSectionHTML(for section: Section<Blog>, context: PublishingContext<Blog>) throws -> HTML {
+        let latest = context.sections.first(where: { $0.id == .home})!.items.first!
         switch section.id {
         case .home:
-            return try makeHomeHTML(for: context.index, section: section, context: context)
-        case .combine:
-            return try makePostsHTML(for: section, context: context)
-            //        case "posts":
-            //            return try makePostsHTML(for: section, context: context)
-            //        case "home":
-            //            return try makeHomeHTML(for: context.index, section: section, context: context)
-            //        case "about":
-            //            return HTML(.text("Hello about!"))
+            return try makeHomeHTML(latestItem: latest, for: context.index, section: section, context: context)
+        case .combine, .dataStructures, .algorithms, .swiftUI:
+            return try makePageByCategory(title: section.id.rawValue, latestPost: latest, for: section, context: context)
         default:
             return HTML(
                 .head(for: context.index, on: context.site),
