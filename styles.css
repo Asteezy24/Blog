@@ -105,7 +105,7 @@ pre code .preprocessing {
 
 .wrapper {
     max-width: 900px;
-    /*    margin-left: auto;*/
+    margin-left: auto;
     margin-right: auto;
     padding: 40px;
     text-align: left;
@@ -215,9 +215,9 @@ a {
 }
 
 .item-list {
-    /*    display: table;*/
-    margin: 0 auto;
-    column-count: 2;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .category-image {
@@ -271,23 +271,19 @@ a {
 /*    margin-right: 10%;*/
 /*}*/
 
-.item-list > img {
-    width: 100%
-    padding: 0px;
+.post-image {
+    width: 100%;
+    padding: 20px;
 }
 
 .item-list > li {
     display: block;
-    /*    width: 50%;*/
-    /*    border-radius: 20px;*/
-    /*    background-color: #eee;*/
-    margin-bottom: 20px;
+    border-radius: 20px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
-    /*    padding: 40px;*/
-    overflow: hidden; /* fix for Firefox */
-    break-inside: avoid-column;
+    padding: 20px;
+    overflow: hidden;
     -webkit-column-break-inside: avoid;
 }
 
@@ -357,7 +353,7 @@ footer {
     }
     
     .item-list > li {
-        /*        background-color: #333;*/
+        background-color: #333;
     }
     
     header {
