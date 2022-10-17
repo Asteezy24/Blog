@@ -1,4 +1,439 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Swift Refresher</title><description>Keeping you up to date on the latest developments in the world of Swift &amp; iOS programming!</description><link>https://swiftrefresher.com</link><language>en</language><lastBuildDate>Fri, 9 Sep 2022 16:32:41 -0400</lastBuildDate><pubDate>Fri, 9 Sep 2022 16:32:41 -0400</pubDate><ttl>250</ttl><atom:link href="https://swiftrefresher.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://swiftrefresher.com/leetcode/blind-75-binary-search</guid><title>Blind 75: Binary Search</title><description>The programmers favorite searching mechanism!</description><link>https://swiftrefresher.com/leetcode/blind-75-binary-search</link><pubDate>Mon, 29 Aug 2022 16:31:00 -0400</pubDate><content:encoded><![CDATA[<h1>Binary Search</h1><p>So you have mastered the basic string and array problems. Awesome. Now we will be moving on to Binary Search. Binary Search is the most common searching mechanism, and really the only one seen in Leetcode problems. Let's give an overview of how Binary Search works, and why it is better than a common linear search.</p><p>So Swift has a built in method of searching for an element in an array, we could simply do:</p><pre><code><div class="highlight"><span></span><span class="kd">let</span> <span class="nv">array</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Swift Refresher</title><description>Keeping you up to date on the latest developments in the world of Swift &amp; iOS programming!</description><link>https://swiftrefresher.com</link><language>en</language><lastBuildDate>Mon, 17 Oct 2022 16:21:16 -0400</lastBuildDate><pubDate>Mon, 17 Oct 2022 16:21:16 -0400</pubDate><ttl>250</ttl><atom:link href="https://swiftrefresher.com/feed.rss" rel="self" type="application/rss+xml"/><item><guid isPermaLink="true">https://swiftrefresher.com/leetcode/blind-75-linked-lists</guid><title>Blind 75: Linked Lists</title><description>Like an array...but not really</description><link>https://swiftrefresher.com/leetcode/blind-75-linked-lists</link><pubDate>Mon, 12 Sep 2022 14:44:00 -0400</pubDate><content:encoded><![CDATA[<h1>Linked Lists</h1><h2>Introduction</h2><p>The description says it all. Linked Lists are kind of like arrays, but they have their own special nuances.</p><p>A linked list, is a data structure, represented as a sequence of Nodes. Typically a node contains 2 things. A value or object of some kind, and a pointer to the next node in the sequence. Linked Lists come in 2 flavors: singly-linked and doubly linked list. We will go over each of these in more depth later.</p><p>Unlike an array, lookup of values in a linked list is not a constant time operation. You must traverse the array to find what value you are looking for.</p><p>Typical examples of when you might need to use a Linked List is a queue for example. With an array, when you remove an element from the front, you must shift all the other elements. In a linked list, it is just a matter of changing the head pointer.</p><h3>Singly-Linked List</h3><p>With singly linked lists, we have a value, and a pointer to the next node. The first node is commonly known as the "Head", and the last node is known as the "Tail". It is worth noting the pointer to the next node is Optional, as the Tail node's pointer will be nil, representing the end of the linked list.<br><br>Let's discuss some time complexities of common singly linked list operations:</p><ul><li>Accessing the head of the list = <strong>O(1)</strong></li><li>Accessing the tail of the list = <strong>O(n)</strong></li><li>Accessing the middle of the list = <strong>O(n)</strong></li><li>Insert/Remove the head of the list = <strong>O(1)</strong></li><li>Insert/Remove the tail of the list = <strong>O(n)</strong> to access and then an <strong>O(1)</strong> operation</li><li>Insert/Remove the middle of the list = <strong>O(n)</strong> to access and then an <strong>O(1)</strong> operation</li><li>Searching for a value = <strong>O(n)</strong></li></ul><h3>Doubly-Linked List</h3><p>A doubly linked list is just like a singly linked list except it has 2 pointers in its node instead of 1. The 2nd pointer is a reference to the previous node. This gives doubly linked lists a major advantage, considering if you need to go backwards in your list it is very simple. With a singly linked list, if you need to go backwards, you need to start your search over.</p><p>Worth noting that doubly linked lists take up slightly more memory due to the 2nd pointer.</p><p>Let's discuss some time complexities of common doubly linked list operations:</p><ul><li>Accessing the head of the list = <strong>O(1)</strong></li><li>Accessing the tail of the list = <strong>O(1)</strong></li><li>Accessing the middle of the list = <strong>O(n)</strong></li><li>Insert/Remove the head of the list = <strong>O(1)</strong></li><li>Insert/Remove the tail of the list = <strong>O(1)</strong></li><li>Insert/Remove the middle of the list = <strong>O(n)</strong> to access and then an <strong>O(1)</strong> operation</li><li>Searching for a value = <strong>O(n)</strong></li></ul><p>Slightly faster on some operations!</p><p>Also I would like to briefly touch on circular linked lists. This is where there is no clear head or tail, because the tail points to its head. Can be singly or doubly linked in these situations.</p><h2>Code Representation</h2><p>Although implementing a Linked List in an interview is a very rare occurrence, it still helps to know how it works under the hood from a code perspective.</p><h4>Singly Linked List Node</h4><pre><code><div class="highlight"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nv">value</span><span class="p">:</span> <span class="nb">String</span>
+  <span class="kd">var</span> <span class="nv">next</span><span class="p">:</span> <span class="n">Node</span><span class="p">?</span> <span class="c1">// Note the optionality here</span>
+
+  <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kc">self</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</div></code></pre><h4>Doubly Linked List Node</h4><pre><code><div class="highlight"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nv">value</span><span class="p">:</span> <span class="nb">String</span>
+  <span class="kd">var</span> <span class="nv">next</span><span class="p">:</span> <span class="n">Node</span><span class="p">?</span>
+  <span class="kr">weak</span> <span class="kd">var</span> <span class="nv">previous</span><span class="p">:</span> <span class="n">Node</span><span class="p">?</span> <span class="c1">// Note the weak ownership here to avoid a retain cycle</span>
+
+  <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kc">self</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</div></code></pre><h4>Linked List Class</h4><pre><code><div class="highlight"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">head</span><span class="p">:</span> <span class="n">Node</span><span class="p">?</span>
+    
+    <span class="c1">// Helpers</span>
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">isEmpty</span><span class="p">:</span> <span class="nb">Bool</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">head</span> <span class="p">==</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">first</span><span class="p">:</span> <span class="n">Node</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">head</span>
+    <span class="p">}</span>
+    
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">last</span><span class="p">:</span> <span class="n">Node</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="kd">var</span> <span class="nv">node</span> <span class="p">=</span> <span class="n">head</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+        <span class="k">while</span> <span class="kd">let</span> <span class="nv">next</span> <span class="p">=</span> <span class="n">node</span><span class="p">.</span><span class="n">next</span> <span class="p">{</span> <span class="n">node</span> <span class="p">=</span> <span class="n">next</span> <span class="p">}</span>
+        <span class="k">return</span> <span class="n">node</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Operations</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">append</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">newNode</span> <span class="p">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="kd">let</span> <span class="nv">lastNode</span> <span class="p">=</span> <span class="bp">last</span> <span class="p">{</span>
+            <span class="n">newNode</span><span class="p">.</span><span class="n">previous</span> <span class="p">=</span> <span class="n">lastNode</span>
+            <span class="n">lastNode</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="n">newNode</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">head</span> <span class="p">=</span> <span class="n">newNode</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// Get node at a certain index</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">node</span><span class="p">(</span><span class="n">atIndex</span> <span class="n">index</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Node</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">head</span><span class="p">!</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nv">node</span> <span class="p">=</span> <span class="n">head</span><span class="p">!.</span><span class="n">next</span>
+            <span class="k">for</span> <span class="kc">_</span> <span class="k">in</span> <span class="mf">1.</span><span class="p">.&lt;</span><span class="n">index</span> <span class="p">{</span>
+                <span class="n">node</span> <span class="p">=</span> <span class="n">node</span><span class="p">?.</span><span class="n">next</span>
+                <span class="k">if</span> <span class="n">node</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">//(*1)</span>
+                    <span class="k">break</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">node</span><span class="p">!</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// Insert at a certain index</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="kc">_</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">atIndex</span> <span class="n">index</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">newNode</span> <span class="p">=</span> <span class="n">node</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="n">newNode</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="n">head</span>
+            <span class="n">head</span><span class="p">?.</span><span class="n">previous</span> <span class="p">=</span> <span class="n">newNode</span>
+            <span class="n">head</span> <span class="p">=</span> <span class="n">newNode</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">prev</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">node</span><span class="p">(</span><span class="n">atIndex</span><span class="p">:</span> <span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="kd">let</span> <span class="nv">next</span> <span class="p">=</span> <span class="n">prev</span><span class="p">.</span><span class="n">next</span>
+            
+            <span class="n">newNode</span><span class="p">.</span><span class="n">previous</span> <span class="p">=</span> <span class="n">prev</span>
+            <span class="n">newNode</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="n">prev</span><span class="p">.</span><span class="n">next</span>
+            <span class="n">prev</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="n">newNode</span>
+            <span class="n">next</span><span class="p">?.</span><span class="n">previous</span> <span class="p">=</span> <span class="n">newNode</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// Remove a node</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">T</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">prev</span> <span class="p">=</span> <span class="n">node</span><span class="p">.</span><span class="n">previous</span>
+        <span class="kd">let</span> <span class="nv">next</span> <span class="p">=</span> <span class="n">node</span><span class="p">.</span><span class="n">next</span>
+        
+        <span class="k">if</span> <span class="kd">let</span> <span class="nv">prev</span> <span class="p">=</span> <span class="n">prev</span> <span class="p">{</span>
+            <span class="n">prev</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="n">next</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">head</span> <span class="p">=</span> <span class="n">next</span>
+        <span class="p">}</span>
+        <span class="n">next</span><span class="p">?.</span><span class="n">previous</span> <span class="p">=</span> <span class="n">prev</span>
+        
+        <span class="n">node</span><span class="p">.</span><span class="n">previous</span> <span class="p">=</span> <span class="kc">nil</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="kc">nil</span>
+        <span class="k">return</span> <span class="n">node</span><span class="p">.</span><span class="n">value</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</div></code></pre><p>Not too bad! We cover some simple linked list operations here that will play into some more in depth Leetcode problems down the line.</p><h2>Common Linked List Operations</h2><p>It will help us in the future if we remember how some common linked list operations work, even if we remember them in english.</p><h4>Delete a Node</h4><p>To delete a node from a linked list, we have different tactics for singly vs doubly linked list:</p><ul><li>Singly Linked List: For node N, find the previous node, and set <strong>previous.next = n.next</strong></li><li>Doubly Linked List: For node N, set <strong>n.next.previous = n.previous</strong></li></ul><h4>Runner Technique</h4><p>Commonly in Linked Lists you will find the need to use the runner technique. This technique is implemented by having 2 pointers at the same time in your list. One pointer will move ahead of the either. You can either do: - Fast node moves by fixed amount - For every 1 move of the slow pointer, the fast pointer jumps multiple nodes.</p><p>This is commonly used for finding cycles within your linked list.</p><p>Last overview point to make about Linked List is that a lot of leetcode linked list problems rely on recursion. When solving problems, remember recursive solutions automatically add O(N) space due to the ever expanding call stack of the function.</p><hr><h1>Reverse Linked List</h1><p>Time to start the foundation of our linked list knowledge!</p><img src="https://swiftrefresher.com/reverselinkedlist.png"/><p>This is a classic LinkedList problem, and is honestly really fun to reverse engineer. Learning how to reverse a linked list will set us up for success later down the road with other leetcode problems.</p><h3>[ Recursive ]</h3><h3>[ O(n) worst time + O(n) space ]</h3><p>Remember what we said earlier! A lot of Linked List problems can be solved recursively (with a hit on our space complexity due to the call stack.)</p><p>When I think about recursive problems, I like to start with the base case. In our case, the base case is if the linked list is empty, or only has 1 node. If that is the case there is nothing to reverse!</p><p>Now if we look at the recursive case, when we have 2 nodes, we know we will need to reverse the order of them. That means doing 3 things:</p><ol><li>Setting our heads next pointer to nil, signifying the end of the list</li><li>Setting our current node's next pointer, to the previous node</li><li>Setting our current node to the next node</li></ol><p>Let's run thru an example for this. Say we have a list of [1-&gt;2]. Keep in mind we will be recursing, so we are working from the back to the front. In this example our current node is 2, and our head is 1. We want to set our heads next pointer to nil, signifying the end of the list. This makes our linked list now [1 2] with no next pointer on 1. We also want to set our current nodes next pointer, to the previous pointer. This makes our linked list now [1&lt;-2]. And we want to set our current node to the next node, which would end our loop. Boom! It is reversed. Let's think about the pseudocode here.</p><pre><code><div class="highlight"><span></span><span class="k">if</span> <span class="n">our</span> <span class="n">list</span> <span class="k">is</span> <span class="n">empty</span> <span class="n">or</span> <span class="n">there</span> <span class="k">is</span> <span class="n">only</span> <span class="mi">1</span> <span class="n">node</span>
+    <span class="k">return</span> <span class="n">the</span> <span class="n">head</span>
+<span class="n">recurse</span> <span class="n">on</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">the</span> <span class="n">linked</span> <span class="n">list</span> <span class="p">(</span><span class="n">the</span> <span class="n">next</span> <span class="n">node</span> <span class="n">from</span> <span class="n">head</span><span class="p">)</span>
+
+<span class="n">our</span> <span class="n">current</span> <span class="n">node</span> <span class="k">is</span> <span class="n">heads</span> <span class="n">next</span>
+<span class="n">current</span> <span class="n">nodes</span> <span class="n">next</span> <span class="k">is</span> <span class="n">the</span> <span class="n">head</span>
+<span class="n">heads</span> <span class="n">next</span> <span class="k">is</span> <span class="kc">nil</span>
+
+<span class="k">return</span> <span class="n">the</span> <span class="n">recursed</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">the</span> <span class="n">linked</span> <span class="n">list</span>
+</div></code></pre><p>Very wordy! Our space complexity here is O(n) due to the recursive call stack. Keeping references to nodes is O(1) space. The time complexity here is O(n) where n is the number of nodes in our linked list. This is because we need to visit every node to reverse them.</p><p>Here is the fully flushed out code solution:</p><pre><code><div class="highlight"><span></span><span class="c1">// Base Case</span>
+<span class="k">if</span> <span class="n">head</span> <span class="p">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="n">head</span><span class="p">?.</span><span class="n">next</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="n">head</span> <span class="p">}</span>
+<span class="c1">// Recursive Case</span>
+<span class="kd">let</span> <span class="nv">newHead</span> <span class="p">=</span> <span class="n">reverseList</span><span class="p">(</span><span class="n">head</span><span class="p">.</span><span class="n">next</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nv">nextNode</span> <span class="p">=</span> <span class="n">head</span><span class="p">.</span><span class="n">next</span>
+<span class="n">nextNode</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">head</span>
+<span class="n">head</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="kc">nil</span>
+
+<span class="k">return</span> <span class="n">newHead</span>
+</div></code></pre><h3>[ Iterative ]</h3><h3>[ O(n) time + O(1) space ]</h3><p>I personally feel it is easier to derive the iterative solution for this problem.</p><p>The idea behind the iterative solution, is we have a buffer for the previous node (since this is a singly linked list, we don't know what the previous node will be at every round of iteration.), and we follow similar patterns for the recursive solution, to reverse the list. It would look something like this:</p><pre><code><div class="highlight"><span></span><span class="n">previous</span> <span class="n">node</span> <span class="k">is</span> <span class="kc">nil</span>
+<span class="n">current</span> <span class="n">node</span> <span class="k">is</span> <span class="n">the</span> <span class="n">head</span>
+
+<span class="k">while</span> <span class="n">there</span> <span class="k">is</span> <span class="n">a</span> <span class="n">node</span> <span class="n">next</span> <span class="n">to</span> <span class="n">our</span> <span class="n">current</span>
+    <span class="kr">set</span> <span class="n">current</span> <span class="n">nodes</span> <span class="n">next</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">previous</span> <span class="n">node</span> 
+    <span class="kr">set</span> <span class="n">previous</span> <span class="n">to</span> <span class="n">current</span> <span class="n">node</span>
+    <span class="kr">set</span> <span class="n">current</span> <span class="n">node</span> <span class="n">to</span> <span class="n">next</span> <span class="n">node</span>
+    
+<span class="n">at</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">our</span> <span class="n">loop</span><span class="p">,</span> <span class="kr">set</span> <span class="n">the</span> <span class="kr">final</span> <span class="n">nodes</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">previous</span> <span class="n">node</span>
+<span class="k">return</span> <span class="n">the</span> <span class="n">current</span> <span class="n">node</span>
+</div></code></pre><p>The trick here is using a <strong>while let</strong> loop to capture the next node at every iteration. The space complexity is much reduced here, as we only have 2 variables to hold references to nodes. This equals O(1) space. The time complexity is O(n) because we just need to traverse the linked list once.</p><p>Here is the final implementation:</p><pre><code><div class="highlight"><span></span><span class="k">guard</span> <span class="n">head</span><span class="p">?.</span><span class="n">next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="n">head</span> <span class="p">}</span> <span class="c1">// edge cases</span>
+<span class="kd">var</span> <span class="nv">previous</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span>
+<span class="kd">var</span> <span class="nv">current</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">head</span>
+
+<span class="k">while</span> <span class="kd">let</span> <span class="nv">nextNode</span> <span class="p">=</span> <span class="n">current</span><span class="p">?.</span><span class="n">next</span> <span class="p">{</span> <span class="c1">// capture the next node</span>
+    <span class="n">current</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">previous</span>
+    <span class="n">previous</span> <span class="p">=</span> <span class="n">current</span>
+    <span class="n">current</span> <span class="p">=</span> <span class="n">nextNode</span>
+<span class="p">}</span>
+
+<span class="n">current</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">previous</span> <span class="c1">// complete the sequence</span>
+<span class="k">return</span> <span class="n">current</span>
+</div></code></pre><p>Not so bad right? On to the next!</p><hr><h1>Merge Two Sorted Lists</h1><p>Here is another essential &amp; common problem when it comes to linked lists!</p><img src="https://swiftrefresher.com/mergetwosortedlists.png"/><p>After looking at this problem it seems pretty straight forward. There is not really a brute force solution to be discussed here, so let's dive into the approach.</p><h3>[ Dummy Node + 2 pointers ]</h3><h3>[ O(n) worst time + O(n) space ]</h3><p>So the idea here is straight forward enough, we just need to be careful when it comes to implementation.</p><p>First off, we need a dummy node that we will be building our return result around. Ultimately we do not care about the dummy node, but everything after it. Hence we will be returning dummy nodes next node. We will also need 2 pointers to keep track of our progress of adding nodes from linked list 1 &amp; 2. As we add values to our return result, we will move our pointers to not add duplicate values.</p><p>At each iteration, we want to compare the values from lists 1 &amp; 2. If they are equal, add both to the result. Otherwise we will be adding the smaller of the 2 nodes.</p><p>After we run out of nodes to add in one list, we want to make sure we get all the nodes from the remaining list, and vice versa.</p><p>Here is the pseudocode!</p><pre><code><div class="highlight"><span></span><span class="k">while</span> <span class="k">in</span> <span class="n">range</span> <span class="n">of</span> <span class="n">list</span> <span class="n">one</span> <span class="n">AND</span> <span class="n">list</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">node</span> <span class="k">in</span> <span class="n">list</span> <span class="mi">1</span> <span class="k">is</span> <span class="bp">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">node</span> <span class="n">value</span> <span class="k">in</span> <span class="n">list</span> <span class="mi">2</span>
+        <span class="n">add</span> <span class="n">both</span> <span class="n">to</span> <span class="n">the</span> <span class="n">result</span>
+        <span class="n">move</span> <span class="n">pointers</span> <span class="k">in</span> <span class="n">both</span> <span class="n">lists</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">node</span> <span class="mi">2</span> <span class="n">value</span>
+        <span class="n">add</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">result</span>
+        <span class="n">move</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">pointer</span>
+    <span class="k">else</span>
+        <span class="n">add</span> <span class="n">node</span> <span class="mi">2</span> <span class="n">to</span> <span class="n">result</span>
+        <span class="n">move</span> <span class="n">node</span> <span class="mi">2</span> <span class="n">pointer</span>
+        
+<span class="k">while</span> <span class="n">list</span> <span class="mi">1</span> <span class="n">pointer</span> <span class="k">is</span> <span class="n">not</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">list</span> <span class="mi">1</span>
+    <span class="n">add</span> <span class="n">node</span> <span class="n">to</span> <span class="n">result</span>
+
+<span class="k">while</span> <span class="n">list</span> <span class="mi">2</span> <span class="n">pointer</span> <span class="k">is</span> <span class="n">not</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">list</span> <span class="mi">2</span>
+    <span class="n">add</span> <span class="n">node</span> <span class="n">to</span> <span class="n">result</span>
+    
+<span class="k">return</span> <span class="n">dummy</span><span class="p">.</span><span class="n">next</span>
+</div></code></pre><p>As we can see here there are many loops! But luckily they are sequential and not nested, so it doesn't hurt our time complexity. The time complexity here is O(n) where n is the length of the combination of the 2 lists. If our input lists are of length 3 and 4 respectively, we know we will be looping 7 times. Our space complexity is O(n) at the worst. n is representative of the return result, as our result will continue to grow and take up space as we iterate. Our pointers do not take up memory because under the hood, the list node we are storing as a pointer is just an address in memory. Not a representation of all nodes at a given time.</p><p>Here is the final implementation.</p><pre><code><div class="highlight"><span></span><span class="k">if</span> <span class="n">list1</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="n">list2</span> <span class="p">}</span> <span class="c1">// edge case</span>
+<span class="k">if</span> <span class="n">list2</span> <span class="p">==</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="n">list1</span> <span class="p">}</span> <span class="c1">// edge case</span>
+
+<span class="kd">var</span> <span class="nv">listOnePointer</span> <span class="p">=</span> <span class="n">list1</span>
+<span class="kd">var</span> <span class="nv">listTwoPointer</span> <span class="p">=</span> <span class="n">list2</span>
+<span class="kd">var</span> <span class="nv">newList</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">()</span> <span class="c1">// our dummy node</span>
+<span class="kd">var</span> <span class="nv">newListPointer</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">newList</span> <span class="c1">// our pointer in our new list</span>
+
+<span class="k">while</span> <span class="n">listOnePointer</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">listTwoPointer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// while both are in range</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">listOnePointerValue</span> <span class="p">=</span> <span class="n">listOnePointer</span><span class="p">?.</span><span class="n">val</span><span class="p">,</span> <span class="kd">let</span> <span class="nv">listTwoPointerValue</span> <span class="p">=</span> <span class="n">listTwoPointer</span><span class="p">?.</span><span class="n">val</span> <span class="k">else</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="n">listOnePointerValue</span> <span class="p">==</span> <span class="n">listTwoPointerValue</span> <span class="p">{</span> <span class="c1">// equal value</span>
+        <span class="c1">// add both to the result</span>
+        <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">listOnePointerValue</span><span class="p">)</span>
+        <span class="n">newListPointer</span> <span class="p">=</span> <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span>
+        <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">listOnePointerValue</span><span class="p">)</span>
+        <span class="n">newListPointer</span> <span class="p">=</span> <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span>
+        <span class="c1">// move our pointers</span>
+        <span class="n">listOnePointer</span> <span class="p">=</span> <span class="n">listOnePointer</span><span class="p">?.</span><span class="n">next</span>
+        <span class="n">listTwoPointer</span> <span class="p">=</span> <span class="n">listTwoPointer</span><span class="p">?.</span><span class="n">next</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">listOnePointerValue</span> <span class="o">&lt;</span> <span class="n">listTwoPointerValue</span> <span class="p">{</span>
+        <span class="c1">// add to result</span>
+        <span class="kd">let</span> <span class="nv">newNode</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">listOnePointerValue</span><span class="p">)</span>
+        <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">newNode</span>
+        <span class="n">newListPointer</span> <span class="p">=</span> <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span>
+        <span class="c1">// move pointer</span>
+        <span class="n">listOnePointer</span> <span class="p">=</span> <span class="n">listOnePointer</span><span class="p">?.</span><span class="n">next</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// add to result</span>
+        <span class="kd">let</span> <span class="nv">newNode</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">listTwoPointerValue</span><span class="p">)</span>
+        <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">newNode</span>
+        <span class="n">newListPointer</span> <span class="p">=</span> <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span>
+        <span class="c1">// move pointer</span>
+        <span class="n">listTwoPointer</span> <span class="p">=</span> <span class="n">listTwoPointer</span><span class="p">?.</span><span class="n">next</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Finish off the stragglers</span>
+<span class="k">while</span> <span class="n">listOnePointer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">listOnePointerValue</span> <span class="p">=</span> <span class="n">listOnePointer</span><span class="p">?.</span><span class="n">val</span> <span class="k">else</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+    <span class="kd">let</span> <span class="nv">newNode</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">listOnePointerValue</span><span class="p">)</span>
+    <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">newNode</span>
+    <span class="n">newListPointer</span> <span class="p">=</span> <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">listOnePointer</span> <span class="p">=</span> <span class="n">listOnePointer</span><span class="p">?.</span><span class="n">next</span>
+<span class="p">}</span>
+
+<span class="k">while</span> <span class="n">listTwoPointer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="kd">let</span> <span class="nv">listTwoPointerValue</span> <span class="p">=</span> <span class="n">listTwoPointer</span><span class="p">?.</span><span class="n">val</span> <span class="k">else</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+    <span class="kd">let</span> <span class="nv">newNode</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">listTwoPointerValue</span><span class="p">)</span>
+    <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">newNode</span>
+    <span class="n">newListPointer</span> <span class="p">=</span> <span class="n">newListPointer</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">listTwoPointer</span> <span class="p">=</span> <span class="n">listTwoPointer</span><span class="p">?.</span><span class="n">next</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="n">newList</span><span class="p">.</span><span class="n">next</span>
+</div></code></pre><p>Well done! With linked list problems we need to be aware of any out of bounds exceptions, or nil values on a nodes next pointer.</p><hr><h1>Reorder List</h1><p>This problem does a good job combining our previous 2 problems into one</p><img src="https://swiftrefresher.com/reorderlist.png"/><p>Getting a little tricky! There are 2 main components to this problem we will work through together.</p><h3>[ Reverse + Merge ]</h3><h3>[ O(n) worst time + O(n) space ]</h3><p>So there are 3 parts to this problem.</p><p>The first problem is, we need to somehow get to the middle of the list so that we fill in our new list as specified, with the first node, then last node, then 2nd node, etc. Since this is a singly linked list we do not have any access to the previous node values. In order to get to the middle of the list, we can use the runner technique where we have a fast and slow pointer. We move the slow pointer 1 at a time, and the fast pointer 2 nodes at a time. When the fast node gets to the end, we know our slow pointer is in the middle of our list. This will work for both even and odd numbered linked lists. Pseudocode:</p><pre><code><div class="highlight"><span></span><span class="n">start</span> <span class="n">slow</span> <span class="n">at</span> <span class="n">the</span> <span class="n">beginning</span>
+<span class="n">start</span> <span class="n">fast</span> <span class="n">at</span> <span class="n">the</span> <span class="mi">2</span><span class="n">nd</span> <span class="n">node</span>
+<span class="k">while</span> <span class="n">fast</span> <span class="n">pointer</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span> <span class="n">AND</span> <span class="n">fast</span> <span class="n">pointers</span> <span class="n">next</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span>
+    <span class="n">move</span> <span class="n">slow</span> <span class="n">by</span> <span class="mi">1</span>
+    <span class="n">move</span> <span class="n">fast</span> <span class="n">by</span> <span class="mi">2</span>
+</div></code></pre><p>Easy Enough!</p><p>The second part of this problem, is now that we are in the middle of our list, we know what the second half of our list is. It is everything to the right of the slow pointer. We need to reverse this portion of our list in place. This is so we split our original list up into 2 parts. A normal front half, and a reversed second half, so we can merge the 2 accordingly. ALSO, it is important we break the pointer between the first &amp; reversed second half, so we don't have any circular lists in the future. Like this:</p><pre><code><div class="highlight"><span></span><span class="kr">get</span> <span class="n">second</span> <span class="n">half</span> <span class="n">of</span> <span class="n">list</span> <span class="n">from</span> <span class="n">slow</span> <span class="n">pointer</span>
+<span class="n">keep</span> <span class="n">track</span> <span class="n">of</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">node</span>
+
+<span class="k">while</span> <span class="n">our</span> <span class="n">secondHalfs</span> <span class="n">next</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span>
+    <span class="n">secondHalfs</span> <span class="n">next</span> <span class="n">to</span> <span class="n">previous</span>
+    <span class="kr">set</span> <span class="n">previous</span> <span class="n">to</span> <span class="n">current</span>
+    <span class="kr">set</span> <span class="n">current</span> <span class="n">to</span> <span class="n">next</span>
+
+<span class="kr">set</span> <span class="n">secondHalfs</span> <span class="n">next</span> <span class="n">to</span> <span class="n">previous</span>
+<span class="kr">set</span> <span class="n">slowPointers</span> <span class="n">next</span> <span class="n">to</span> <span class="kc">nil</span>
+</div></code></pre><p>Ok. Cool.</p><p>The final part of the solution is merging the 2 lists together. We can say our firstHalf is the head of our linked list. This is because we broke off the slow pointers next node, thus breaking the list in half. The secondHalf is the reversed list we just created. Now, we will fill in the lists alternating from the firstHalf and secondHalf</p><pre><code><div class="highlight"><span></span><span class="kr">get</span> <span class="n">firstHalf</span>
+<span class="kr">get</span> <span class="n">secondHalf</span>
+
+<span class="n">create</span> <span class="n">new</span> <span class="n">list</span> <span class="n">with</span> <span class="n">dummy</span> <span class="n">node</span>
+<span class="kr">set</span> <span class="n">head</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">new</span> <span class="n">list</span> <span class="n">head</span>
+
+<span class="k">while</span> <span class="n">we</span> <span class="n">havent</span> <span class="n">gotten</span> <span class="n">to</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">firstHalf</span> <span class="n">AND</span> <span class="n">we</span> <span class="n">havent</span> <span class="n">gotten</span> <span class="n">to</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">secondHalf</span>
+    <span class="kr">set</span> <span class="n">new</span> <span class="n">lists</span> <span class="n">next</span> <span class="n">to</span> <span class="bp">first</span> <span class="n">half</span>
+    <span class="n">move</span> <span class="bp">first</span> <span class="n">half</span> <span class="n">to</span> <span class="n">next</span>
+    <span class="n">move</span> <span class="n">new</span> <span class="n">list</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">next</span>
+    
+    <span class="kr">set</span> <span class="n">new</span> <span class="n">lists</span> <span class="n">next</span> <span class="n">to</span> <span class="n">second</span> <span class="n">half</span>
+    <span class="n">move</span> <span class="n">second</span> <span class="n">half</span> <span class="n">to</span> <span class="n">next</span>
+    <span class="n">move</span> <span class="n">new</span> <span class="n">list</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">next</span>
+    
+
+<span class="k">if</span> <span class="n">there</span> <span class="n">are</span> <span class="n">leftovers</span> <span class="k">in</span> <span class="n">firstHalf</span>
+    <span class="n">add</span> <span class="n">them</span> <span class="n">to</span> <span class="n">new</span> <span class="n">list</span>
+<span class="k">if</span> <span class="n">there</span> <span class="n">are</span> <span class="n">leftovers</span> <span class="k">in</span> <span class="n">secondHalf</span>
+    <span class="n">add</span> <span class="n">them</span> <span class="n">to</span> <span class="n">new</span> <span class="n">list</span> 
+
+<span class="k">return</span> <span class="n">the</span> <span class="n">head</span> <span class="n">pointers</span> <span class="n">next</span>
+</div></code></pre><p>This part can get a little tricky! We need to keep edge cases in mind. Bringing it all together, we have this pseudocode solution:</p><pre><code><div class="highlight"><span></span><span class="c1">// 1.</span>
+<span class="n">start</span> <span class="n">slow</span> <span class="n">at</span> <span class="n">the</span> <span class="n">beginning</span>
+<span class="n">start</span> <span class="n">fast</span> <span class="n">at</span> <span class="n">the</span> <span class="mi">2</span><span class="n">nd</span> <span class="n">node</span>
+<span class="k">while</span> <span class="n">fast</span> <span class="n">pointer</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span> <span class="n">AND</span> <span class="n">fast</span> <span class="n">pointers</span> <span class="n">next</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span>
+    <span class="n">move</span> <span class="n">slow</span> <span class="n">by</span> <span class="mi">1</span>
+    <span class="n">move</span> <span class="n">fast</span> <span class="n">by</span> <span class="mi">2</span>
+    
+<span class="c1">// 2.</span>
+<span class="kr">get</span> <span class="n">second</span> <span class="n">half</span> <span class="n">of</span> <span class="n">list</span> <span class="n">from</span> <span class="n">slow</span> <span class="n">pointer</span>
+<span class="n">keep</span> <span class="n">track</span> <span class="n">of</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">node</span>
+
+<span class="k">while</span> <span class="n">our</span> <span class="n">secondHalfs</span> <span class="n">next</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span>
+    <span class="n">secondHalfs</span> <span class="n">next</span> <span class="n">to</span> <span class="n">previous</span>
+    <span class="kr">set</span> <span class="n">previous</span> <span class="n">to</span> <span class="n">current</span>
+    <span class="kr">set</span> <span class="n">current</span> <span class="n">to</span> <span class="n">next</span>
+
+<span class="kr">set</span> <span class="n">secondHalfs</span> <span class="n">next</span> <span class="n">to</span> <span class="n">previous</span>
+<span class="kr">set</span> <span class="n">slowPointers</span> <span class="n">next</span> <span class="n">to</span> <span class="kc">nil</span>
+
+<span class="c1">// 3.</span>
+<span class="kr">get</span> <span class="n">firstHalf</span>
+<span class="kr">get</span> <span class="n">secondHalf</span>
+
+<span class="n">create</span> <span class="n">new</span> <span class="n">list</span> <span class="n">with</span> <span class="n">dummy</span> <span class="n">node</span>
+<span class="kr">set</span> <span class="n">head</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">new</span> <span class="n">list</span> <span class="n">head</span>
+
+<span class="k">while</span> <span class="n">we</span> <span class="n">havent</span> <span class="n">gotten</span> <span class="n">to</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">firstHalf</span> <span class="n">AND</span> <span class="n">we</span> <span class="n">havent</span> <span class="n">gotten</span> <span class="n">to</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">secondHalf</span>
+    <span class="kr">set</span> <span class="n">new</span> <span class="n">lists</span> <span class="n">next</span> <span class="n">to</span> <span class="bp">first</span> <span class="n">half</span>
+    <span class="n">move</span> <span class="bp">first</span> <span class="n">half</span> <span class="n">to</span> <span class="n">next</span>
+    <span class="n">move</span> <span class="n">new</span> <span class="n">list</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">next</span>
+    
+    <span class="kr">set</span> <span class="n">new</span> <span class="n">lists</span> <span class="n">next</span> <span class="n">to</span> <span class="n">second</span> <span class="n">half</span>
+    <span class="n">move</span> <span class="n">second</span> <span class="n">half</span> <span class="n">to</span> <span class="n">next</span>
+    <span class="n">move</span> <span class="n">new</span> <span class="n">list</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">next</span>
+    
+
+<span class="k">if</span> <span class="n">there</span> <span class="n">are</span> <span class="n">leftovers</span> <span class="k">in</span> <span class="n">firstHalf</span>
+    <span class="n">add</span> <span class="n">them</span> <span class="n">to</span> <span class="n">new</span> <span class="n">list</span>
+<span class="k">if</span> <span class="n">there</span> <span class="n">are</span> <span class="n">leftovers</span> <span class="k">in</span> <span class="n">secondHalf</span>
+    <span class="n">add</span> <span class="n">them</span> <span class="n">to</span> <span class="n">new</span> <span class="n">list</span> 
+
+<span class="k">return</span> <span class="n">the</span> <span class="n">head</span> <span class="n">pointers</span> <span class="n">next</span>
+</div></code></pre><p>This is very verbose! But gets the point across. We can see there a dummy list being built and returned, and that takes up O(N) space. The time complexity on average is O(n) because we traverse the list about 3 times but never in a nested fashion.</p><p>Let's take a look at the implementation! I am a fan of readable code, even if that means your Leetcode runtime is not 0 milliseconds.</p><h5>Implementation:</h5><pre><code><div class="highlight"><span></span><span class="kd">var</span> <span class="nv">slowPointer</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">head</span>
+<span class="kd">var</span> <span class="nv">fastPointer</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">head</span><span class="p">?.</span><span class="n">next</span>
+
+<span class="c1">// 1. Get our our fast pointer to the end and our slow pointer to the middle </span>
+<span class="k">while</span> <span class="n">fastPointer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="n">fastPointer</span><span class="p">?.</span><span class="n">next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="n">slowPointer</span> <span class="p">=</span> <span class="n">slowPointer</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">fastPointer</span> <span class="p">=</span> <span class="n">fastPointer</span><span class="p">?.</span><span class="n">next</span><span class="p">?.</span><span class="n">next</span>
+<span class="p">}</span>
+
+<span class="c1">// 2. Reverse the second half</span>
+<span class="kd">var</span> <span class="nv">secondHalf</span> <span class="p">=</span> <span class="n">slowPointer</span><span class="p">?.</span><span class="n">next</span>
+<span class="kd">var</span> <span class="nv">previous</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span>
+
+<span class="k">while</span> <span class="kd">let</span> <span class="nv">next</span> <span class="p">=</span> <span class="n">secondHalf</span><span class="p">?.</span><span class="n">next</span> <span class="p">{</span>
+    <span class="n">secondHalf</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">previous</span>
+    <span class="n">previous</span> <span class="p">=</span> <span class="n">secondHalf</span>
+    <span class="n">secondHalf</span> <span class="p">=</span> <span class="n">next</span>
+<span class="p">}</span>
+<span class="n">secondHalf</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">previous</span>
+<span class="kd">let</span> <span class="nv">reversedList</span> <span class="p">=</span> <span class="n">secondHalf</span>
+<span class="n">slowPointer</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="kc">nil</span>
+        
+<span class="c1">// 3. Merge the two</span>
+<span class="kd">var</span> <span class="nv">firstHalf</span> <span class="p">=</span> <span class="n">head</span>
+<span class="kd">var</span> <span class="nv">secondHalf</span> <span class="p">=</span> <span class="n">reversedList</span>
+
+<span class="kd">var</span> <span class="nv">merged</span><span class="p">:</span><span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// new list</span>
+<span class="kd">let</span> <span class="nv">head</span> <span class="p">=</span> <span class="n">merged</span> <span class="c1">// pointer to new list</span>
+
+<span class="k">while</span> <span class="n">firstHalf</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="n">secondHalf</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="n">merged</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">firstHalf</span>
+    <span class="n">firstHalf</span> <span class="p">=</span> <span class="n">firstHalf</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">merged</span> <span class="p">=</span> <span class="n">merged</span><span class="p">?.</span><span class="n">next</span>
+    
+    <span class="n">merged</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">secondHalf</span>
+    <span class="n">secondHalf</span> <span class="p">=</span> <span class="n">secondHalf</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">merged</span> <span class="p">=</span> <span class="n">merged</span><span class="p">?.</span><span class="n">next</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="kd">let</span> <span class="nv">leftOver</span> <span class="p">=</span> <span class="n">firstHalf</span> <span class="p">{</span>
+    <span class="n">merged</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">leftOver</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="kd">let</span> <span class="nv">leftOver</span> <span class="p">=</span> <span class="n">secondHalf</span> <span class="p">{</span>
+    <span class="n">merged</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">leftOver</span>
+<span class="p">}</span>
+<span class="k">return</span> <span class="n">head</span><span class="p">?.</span><span class="n">next</span> <span class="c1">// return dummys next</span>
+</div></code></pre><p>Whew! That was a doozy. But you can see it combines our first 2 leetcode problems in this section into its own problem.</p><hr><h1>Remove Nth Node From End of List</h1><p>Let's move on to something a little easier!</p><img src="https://swiftrefresher.com/removenthnodefromendoflist.png"/><p>This one is tricky! But once we figure out the trick, it is very straight forward &amp; easy to implement in code.</p><h3>[ Runner Technique ]</h3><h3>[ O(n) time + O(1) space ]</h3><p>So the trick here is figuring out how we know we are currently at the Nth node from the end of the list. We know how to remove a node, we just need to get to the right node to remove. For this we can use the linked list runner technique. We can use a fast pointer &amp; a slow pointer. If we set the fast pointer N spots ahead of the slow pointer, then move them both ahead by one node, when the fast pointer is at the end of the list the slow pointer will be N nodes from the end of the list! Once we get that implementation down, we know it is all about testing the edge cases after that.</p><p>Essentially it will look something like this:</p><pre><code><div class="highlight"><span></span><span class="n">move</span> <span class="n">fast</span> <span class="n">pointer</span> <span class="n">N</span> <span class="n">steps</span> <span class="n">ahead</span>
+<span class="k">while</span> <span class="n">fast</span> <span class="n">pointer</span> <span class="k">is</span> <span class="n">not</span> <span class="kc">nil</span>
+    <span class="n">move</span> <span class="n">both</span> <span class="n">slow</span> <span class="o">&amp;</span> <span class="n">fast</span> <span class="n">ahead</span> <span class="n">by</span> <span class="mi">1</span>
+
+<span class="n">remove</span> <span class="n">the</span> <span class="n">slow</span> <span class="n">pointer</span> <span class="n">node</span>
+</div></code></pre><p>So as we can see, we only traverse the list one time, and removing a node is an O(1) time operation. This equates to O(n) time where n is the length of the linked list. When it comes to space complexity, we are only keeping 3 or 4 variables tracking fast and slow pointers. These variables do not grow in space so it is safe to assume they are O(1) space complexity.</p><p>Time to implement! One thing to keep in mind here though. There are some edge cases at play. If the head node is nil, or only has 1 node we should just return nil because we are removing the only node we have in the entire list. If by the time we move our fast node to the end of the list, and our slow pointer is still at the head, we can just return head.next, since we need to remove the first node in the list. This situation will happen when we have an input variable of N that is greater than or equal to the length of the linked list.</p><p>Here is the implementation:</p><pre><code><div class="highlight"><span></span><span class="k">guard</span> <span class="n">head</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">head</span><span class="p">?.</span><span class="n">next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span> <span class="c1">// Edge Case #1</span>
+<span class="kd">var</span> <span class="nv">headPointer</span> <span class="p">=</span> <span class="n">head</span>
+<span class="kd">var</span> <span class="nv">slow</span> <span class="p">=</span> <span class="n">head</span>
+<span class="kd">var</span> <span class="nv">fast</span> <span class="p">=</span> <span class="n">head</span>
+<span class="kd">var</span> <span class="nv">previous</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span>
+
+<span class="c1">// Move fast pointer n steps ahead</span>
+<span class="k">for</span> <span class="kc">_</span> <span class="k">in</span> <span class="mf">0.</span><span class="p">.&lt;</span><span class="n">n</span> <span class="p">{</span> 
+    <span class="n">fast</span> <span class="p">=</span> <span class="n">fast</span><span class="p">?.</span><span class="n">next</span>
+<span class="p">}</span>
+
+<span class="k">while</span> <span class="n">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// Move fast to end, and keep track of previous along the way</span>
+    <span class="n">previous</span> <span class="p">=</span> <span class="n">slow</span>
+    <span class="n">slow</span> <span class="p">=</span> <span class="n">slow</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">fast</span> <span class="p">=</span> <span class="n">fast</span><span class="p">?.</span><span class="n">next</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="n">slow</span> <span class="p">===</span> <span class="n">head</span> <span class="p">{</span> <span class="k">return</span> <span class="n">slow</span><span class="p">?.</span><span class="n">next</span> <span class="p">}</span> <span class="c1">// Edge Case #2</span>
+
+<span class="c1">// Remove the slow node</span>
+<span class="n">previous</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">slow</span><span class="p">?.</span><span class="n">next</span>        
+<span class="n">slow</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="kc">nil</span>
+<span class="k">return</span> <span class="n">headPointer</span>
+</div></code></pre><p>Not too bad, and I hope by now Linked Lists are getting a little easier to digest. Only 2 more to go!</p><hr><h1>Linked List Cycle</h1><p>This one is an all time classic!</p><img src="https://swiftrefresher.com/linkedlistcycle.png"/><h3>[ Runner Technique ]</h3><h3>[ O(n) time + O(1) space ]</h3><p>So I kind of gave away the answer to this one at the beginning of this article but we can go through the problem regardless.</p><p>The approach here is to use 2 runners &amp; use the runner technique to see if there is a cycle in the list. We would essentially have a fast runner, and a slow runner. We move the slow pointer by 1, and the fast pointer by 2. If those 2 values are ever the same we know there is a cycle, but if we traverse to the end of the list with our fast pointer we know there is not a cycle. Something like this:</p><pre><code><div class="highlight"><span></span><span class="n">fast</span> <span class="n">pointer</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">head</span>
+<span class="n">slow</span> <span class="n">pointer</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">head</span>
+
+<span class="k">while</span> <span class="n">fast</span> <span class="k">is</span> <span class="n">not</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">the</span> <span class="n">list</span>
+    <span class="n">move</span> <span class="n">slow</span> <span class="n">by</span> <span class="mi">1</span>
+    <span class="n">move</span> <span class="n">fast</span> <span class="n">by</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">slow</span> <span class="n">equals</span> <span class="n">fast</span><span class="p">,</span> <span class="k">return</span> <span class="kc">true</span>
+    
+<span class="k">return</span> <span class="kc">false</span> 
+</div></code></pre><p>Very straight forward. I want to touch on how we would compare the 2 nodes though. We could compare the 2 node values, but that wouldn't help if our list has nodes with multiple of the same value. We could conform the node class to <strong>Equatable</strong> which gives us a way of determining the equality of 2 different class instances. But by far the easiest way in this situation, is to use the built in Swift <strong>===</strong> operator. The 3 equals sign operator compares if 2 objects share the same reference in memory. That is a sure fire way to determine if 2 nodes are the same.</p><p>The time complexity here is on average O(n) since we need to traverse the list 1 time when there is not a cycle, and 1 time + some change when there is a cycle. This averages out to O(n) time. The space complexity is O(1) since we do not have any data structures to hold our data, we just have 2 pointers which are constant time.</p><p>Let's check out the implementation!</p><pre><code><div class="highlight"><span></span><span class="kd">var</span> <span class="nv">slow</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">head</span> 
+<span class="kd">var</span> <span class="nv">fast</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">head</span>
+
+<span class="k">while</span> <span class="n">fast</span><span class="p">?.</span><span class="n">next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// While fast is not at the end of the list</span>
+    <span class="n">slow</span> <span class="p">=</span> <span class="n">slow</span><span class="p">?.</span><span class="n">next</span>
+    <span class="n">fast</span> <span class="p">=</span> <span class="n">fast</span><span class="p">?.</span><span class="n">next</span><span class="p">?.</span><span class="n">next</span>
+    <span class="k">if</span> <span class="n">slow</span> <span class="p">===</span> <span class="n">fast</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span> <span class="p">}</span> <span class="c1">// Compare fast &amp; slow memory references</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="kc">false</span>
+</div></code></pre><p>I hope that was an easy one for you!</p><hr><h1>Merge K Sorted Lists</h1><p>Lets finish off this linked list section strong! Here is a bit of a toughie:</p><img src="https://swiftrefresher.com/mergeksortedlists.png"/><h3>[ Merge Sort ]</h3><h3>[ O(NLogK) time + O(N) space ]</h3><p>So if you haven't guessed already, this problem is an extension of our previous Merge Two Sorted Lists problem. This problem is exactly the same, except instead of 2 lists we have an unknown number of K lists.</p><p>A brute force solution to this problem would be to iterate through all lists, and find the proper location for the nodes, and merge. This is a lot of repeated and unnecessary work though.</p><p>We can be a little smarter and use a variation of Merge Sort. Say our K lists we want to merge are [1], [2], [5], [3]. The brute force way is to merge [2] into [1]. Then merge [5], into [1, 2]. To do this we iterate through the 1 node and 2 node. Then we repeat that work when we want to merge 3 into [1, 2, 5]. We iterate from 1 to 2 and insert 3. How can we be more efficient?</p><p>With our same example we can use Merge Sort. Lets say our input is once again [1], [2], [5], [3]. Instead of repeating work, we can merge 1 &amp; 2, then merge 5 &amp; 3. Now our K lists are [1, 2], [3, 5]. Then we can merge those 2 and get [1, 2, 3, 5]. That time we only merge 2 times, and we do not do repeated work.</p><p>Something like this:</p><pre><code><div class="highlight"><span></span><span class="k">while</span> <span class="n">the</span> <span class="bp">count</span> <span class="n">of</span> <span class="n">the</span> <span class="n">K</span> <span class="n">lists</span> <span class="k">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="mi">1</span>
+    <span class="n">keep</span> <span class="n">an</span> <span class="n">array</span> <span class="k">for</span> <span class="n">our</span> <span class="n">merged</span> <span class="n">lists</span>
+    <span class="k">for</span> <span class="n">every</span> <span class="n">other</span> <span class="n">list</span> <span class="k">in</span> <span class="n">k</span>
+        <span class="kr">get</span> <span class="n">list</span> <span class="mi">1</span>
+        <span class="kr">get</span> <span class="n">list</span> <span class="mi">2</span>
+        <span class="n">merge</span> <span class="n">them</span>
+        <span class="n">add</span> <span class="n">to</span> <span class="n">our</span> <span class="n">merged</span> <span class="n">lists</span> <span class="n">array</span>
+    <span class="kr">set</span> <span class="n">k</span> <span class="n">lists</span> <span class="bp">equal</span> <span class="n">to</span> <span class="n">merged</span> <span class="n">lists</span>
+<span class="k">return</span> <span class="bp">first</span> <span class="k">in</span> <span class="n">k</span> <span class="n">lists</span>
+</div></code></pre><p>The best part about this solution, is we already know how to merge 2 lists, so the only net-new code here from our previous problem, is keeping track of the current merged lists at each iteration. The time complexity here is O(NLogK), we are taking our lists, dividing them by 2 every time. We also need to iterate through every node, at every step of the way. This time comes out to O(KLogN) where N is the number of nodes in all lists, and k is the number of lists in the input. Space complexity is O(k), due to us keeping track of all the nodes in each merge iteration.</p><p>Lets check out the real iteration (this time, with a slightly different way of merging 2 lists 👀)</p><pre><code><div class="highlight"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ListNode</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">val</span><span class="p">:</span> <span class="nb">Int</span>
+    <span class="kd">public</span> <span class="kd">var</span> <span class="nv">next</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span>
+    <span class="kd">public</span> <span class="kd">init</span><span class="p">()</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">val</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="kc">self</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span><span class="kc">_</span> <span class="n">val</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">val</span> <span class="p">=</span> <span class="n">val</span><span class="p">;</span> <span class="kc">self</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="kc">nil</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kd">public</span> <span class="kd">init</span><span class="p">(</span><span class="kc">_</span> <span class="n">val</span><span class="p">:</span> <span class="nb">Int</span><span class="p">,</span> <span class="kc">_</span> <span class="n">next</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?)</span> <span class="p">{</span> <span class="kc">self</span><span class="p">.</span><span class="n">val</span> <span class="p">=</span> <span class="n">val</span><span class="p">;</span> <span class="kc">self</span><span class="p">.</span><span class="n">next</span> <span class="p">=</span> <span class="n">next</span><span class="p">;</span> <span class="p">}</span>
+ <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">mergeKLists</span><span class="p">(</span><span class="kc">_</span> <span class="n">lists</span><span class="p">:</span> <span class="p">[</span><span class="n">ListNode</span><span class="p">?])</span> <span class="err">→</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">lists</span><span class="p">.</span><span class="bp">isEmpty</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+    <span class="k">if</span> <span class="n">lists</span><span class="p">.</span><span class="bp">count</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span> <span class="k">return</span> <span class="n">lists</span><span class="p">.</span><span class="bp">first</span><span class="p">!</span> <span class="p">}</span>
+    <span class="kd">var</span> <span class="nv">currLists</span> <span class="p">=</span> <span class="n">lists</span>
+    <span class="k">while</span> <span class="n">currLists</span><span class="p">.</span><span class="bp">count</span> <span class="err">﹥</span> <span class="mi">1</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">mergedLists</span> <span class="p">=</span> <span class="p">[</span><span class="n">ListNode</span><span class="p">?]()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="bp">stride</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="n">currLists</span><span class="p">.</span><span class="bp">count</span><span class="p">,</span> <span class="n">by</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nv">listOne</span> <span class="p">=</span> <span class="n">currLists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="kd">var</span> <span class="nv">listTwo</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="kc">nil</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="err">﹤</span> <span class="n">currLists</span><span class="p">.</span><span class="bp">count</span> <span class="p">{</span> <span class="n">listTwo</span> <span class="p">=</span> <span class="n">currLists</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="p">}</span>
+            <span class="n">mergedLists</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">mergeLists</span><span class="p">(</span><span class="n">listOne</span><span class="p">,</span> <span class="n">listTwo</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="n">currLists</span> <span class="p">=</span> <span class="n">mergedLists</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">currLists</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">mergeLists</span><span class="p">(</span><span class="kc">_</span> <span class="n">listOne</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?,</span> <span class="kc">_</span> <span class="n">listTwo</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?)</span> <span class="err">→</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">dummy</span> <span class="p">=</span> <span class="n">ListNode</span><span class="p">()</span>
+    <span class="kd">var</span> <span class="nv">tail</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">?</span> <span class="p">=</span> <span class="n">dummy</span>
+    <span class="kd">var</span> <span class="nv">listOne</span> <span class="p">=</span> <span class="n">listOne</span>
+    <span class="kd">var</span> <span class="nv">listTwo</span> <span class="p">=</span> <span class="n">listTwo</span>
+    
+    <span class="k">while</span> <span class="n">listOne</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">listTwo</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">listOne</span><span class="p">!.</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">listTwo</span><span class="p">!.</span><span class="n">val</span> <span class="p">{</span>
+            <span class="n">tail</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">listOne</span>
+            <span class="n">listOne</span> <span class="p">=</span> <span class="n">listOne</span><span class="p">!.</span><span class="n">next</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">tail</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">listTwo</span>
+            <span class="n">listTwo</span> <span class="p">=</span> <span class="n">listTwo</span><span class="p">!.</span><span class="n">next</span>
+        <span class="p">}</span>
+        <span class="n">tail</span> <span class="p">=</span> <span class="n">tail</span><span class="p">?.</span><span class="n">next</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="n">listOne</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="n">tail</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">listOne</span> <span class="p">}</span>
+    <span class="k">if</span> <span class="n">listTwo</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="n">tail</span><span class="p">?.</span><span class="n">next</span> <span class="p">=</span> <span class="n">listTwo</span> <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">dummy</span><span class="p">.</span><span class="n">next</span>
+<span class="p">}</span>
+</div></code></pre><p>Nicely done!</p><hr><h1>Conclusion</h1><p>Not too bad! Come back to these problems anytime you need a friendly linked list refresher 😎</p><hr>]]></content:encoded></item><item><guid isPermaLink="true">https://swiftrefresher.com/leetcode/blind-75-binary-search</guid><title>Blind 75: Binary Search</title><description>The programmers favorite searching mechanism!</description><link>https://swiftrefresher.com/leetcode/blind-75-binary-search</link><pubDate>Mon, 29 Aug 2022 16:31:00 -0400</pubDate><content:encoded><![CDATA[<h1>Binary Search</h1><p>So you have mastered the basic string and array problems. Awesome. Now we will be moving on to Binary Search. Binary Search is the most common searching mechanism, and really the only one seen in Leetcode problems. Let's give an overview of how Binary Search works, and why it is better than a common linear search.</p><p>So Swift has a built in method of searching for an element in an array, we could simply do:</p><pre><code><div class="highlight"><span></span><span class="kd">let</span> <span class="nv">array</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 <span class="k">if</span> <span class="kd">let</span> <span class="nv">indexOfElement</span> <span class="p">=</span> <span class="n">array</span><span class="p">.</span><span class="n">firstIndex</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
     <span class="bp">print</span><span class="p">(</span><span class="n">indexOfElement</span><span class="p">)</span>
 <span class="p">}</span>
